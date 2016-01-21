@@ -1,6 +1,13 @@
-# Wave
+# Waves
 
 In this section we're going to introduce you to an important concept in C4: Animations. We'll also show you how to work with gradients and timers to create a wave effect. When we're done, we'll show you how to tweak a single line of code to get some different aesthetics out of the example.
+
+Here are some examples of the animation you'll be building:
+
+![Basic](waves01.png)
+![Rotated 0.05](waves02.png)
+![Rotated 0.20](waves03.png)
+![Rotated PI/4](waves04.png)
 
 Start by creating a new C4 project called Waves.
 
@@ -13,7 +20,7 @@ C4ViewAnimation(duration: 0.25) {
 }
 ```
 
-Now's a good time to check out the basics of animtions and properties over at: http://www.c4ios.com/basics/
+Now's a good time to check out the basics of animations and properties over at: [C4 Basics](http://www.c4ios.com/basics/)
 
 ##Gradients
 For this section, we're going to create a wave of gradients by using a `for` loop and a timer to offset our animations. You can create a simple gradient by giving it a frame and a set of colors, like so:
@@ -31,13 +38,17 @@ override func setup() {
 
 By default, the gradient draws from top to bottom of its frame. If you want to change that you can specify a new value for either its `startPoint` or `endPoint`.
 
-By adding the following line to `setup()` the gradient will draw from its top-left corner to its bottom-right:
+By adding the following line to `setup()`:
 
 ```
 g.endPoint = C4Point(1,1)
 ```
 
+... the gradient will draw from its top-left corner to its bottom-right:
+
 ![Changing the endPoint of a gradient](gradient02.png)
+
+
 
 * Wave
  * Animations
