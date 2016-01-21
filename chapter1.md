@@ -26,7 +26,7 @@ override func setup() {
 }
 ```
 
-![A basic gradient][gradient01.png]
+![A basic gradient](gradient01.png)
 
 
 By default, the gradient draws from top to bottom of its frame. If you want to change that you can specify a new value for either its `startPoint` or `endPoint`.
@@ -37,8 +37,7 @@ By adding the following line to `setup()` the gradient will draw from its top-le
 g.endPoint = C4Point(1,1)
 ```
 
-![Changing the endPoint of a gradient][gradient02.png]
-
+![Changing the endPoint of a gradient](gradient02.png)
 
 * Wave
  * Animations
