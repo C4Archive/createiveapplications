@@ -4,8 +4,13 @@ In this section we're going to introduce you to an important concept in C4: Anim
 
 
 ## Animations
-We don't `draw{}` here. C4 lets you create animations by working with properties, while letting its underlying engine do the heavy-lifting for you.
+In C4, you'll be working a lot with objects that contain properties. For example, all shapes have a `fillColor` and `strokeColor`. C4 lets you create animations by changing the properties of objects. Rather than calculating all the steps between `a` and `b`, you can focus on thinking about states. For example, the following snippet will create a 0.25 second animation where a circle's fill color will shift to red: 
 
+```
+C4ViewAnimation(duration: 0.25) {
+    circle.fillColor = red
+}
+```
 
 
 
