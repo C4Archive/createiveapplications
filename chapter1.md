@@ -75,6 +75,8 @@ override func setup() {
 }
 ```
 
+>NOTE: The timer has to be set as a variable **outside** the method in which you create it.
+
 And, if you want to know how many times the timer has fired, you can do this:
 
 ```
@@ -88,6 +90,8 @@ override func setup() {
 }
 ```
 
+>This will continuously print like so: `Hello C4: 1`,`Hello C4: 2`,`Hello C4: 3`,...
+
 And, if you want to have the timer stop after a given number of iterations, you can do this:
 
 ```
@@ -100,10 +104,40 @@ override func setup() {
     timer.start()
 }
 ```
+>This stops after the timer has fired 10x.
+
+As you can see, timers are easy to work with and give you a range of flexibility in starting, stopping, and changing their parameters.
+
+Now that we've had an overview of the 3 main components of this section, let's build it!
+
+##The Wave
+To create our wave we're going to follow this 4-step process:
+
+1. Build a method that creates a gradient and adds it to the canvas
+2. Use a `repeat` loop to create a lot of gradients
+3. Build a method to customize an animation
+4. Use a timer to initiates the animation for each gradient
+
+###The Gradient Method
 
 
-* Wave
- * Animations
- * Gradients
- * Timers
- * Experiments
+```
+class WorkSpace: C4CanvasController {
+    override func setup() {
+        createGradient(canvas.center)
+    }
+
+    func createGradient(point: C4Point) -> C4Gradient {
+        var colors = [C4Blue,C4Pink]
+
+        if random(below: 2) == 1 {
+            colors = [C4Pink,C4Blue]
+        }
+
+        let g = C4Gradient(frame: C4Rect(0,0,10.0,100.0), colors: colors)
+        g.center = point
+        canvas.add(g)
+        return g
+    }
+}
+```
