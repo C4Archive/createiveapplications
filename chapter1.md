@@ -26,6 +26,7 @@ override func setup() {
 }
 ```
 
+![A basic gradient.][gradient01]
 
 
 By default, the gradient draws from top to bottom of its frame. If you want to change that you can specify a new value for either its `startPoint` or `endPoint`.
