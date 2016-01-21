@@ -119,7 +119,7 @@ To create our wave we're going to follow this 4-step process:
 4. Use a timer to initiates the animation for each gradient
 
 ###The Gradient Method
-
+The main reason we want to have a method that creates our gradient is because we're going to call it over and over again. This step is easy, and nearly the same as above (except for some minor changes).
 
 ```
 class WorkSpace: C4CanvasController {
