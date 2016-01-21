@@ -13,8 +13,6 @@ C4ViewAnimation(duration: 0.25) {
 }
 ```
 
-
-
 Now's a good time to check out the basics of animtions and properties over at: http://www.c4ios.com/basics/
 
 ##Gradients
@@ -22,11 +20,16 @@ For this section, we're going to create a wave of gradients by using a `for` loo
 
 ```
 override func setup() {
-    let g = C4Gradient(frame: C4Rect(0,0,50,200), colors: [C4Pink,C4Blue])
+    let g = C4Gradient(frame: C4Rect(0,0,40,200), colors: [C4Pink,C4Blue])
     g.center = canvas.center
     canvas.add(g)
 }
 ```
+
+
+
+By default, the gradient draws from top to bottom of its frame. If you want to change that you can specify a new value for either its `startPoint` or `endPoint`.
+
 
 
 
