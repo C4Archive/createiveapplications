@@ -8,7 +8,22 @@ Generative animations and gestures in C4.
 * Pan
 * 60fps
 
-* Rain / Gradients
-* Microbes + Pan
-* 
+
+* Wave
+ * Animations
+ * Gradients
+ * Timers
+ * Experiments
+
+
+* Microbes
+ * Animations
+ * Layers
+ * Pan Gesture
+
+* Electric
+ * displayLink()!
+ * 
+* DNA
+* MultiPan (CANLines)
 
