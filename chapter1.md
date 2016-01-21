@@ -49,6 +49,26 @@ g.endPoint = C4Point(1,1)
 ![Changing the endPoint of a gradient](gradient02.png)
 
 
+> Note: when setting the end points you do so with relative values. The corners of the gradient's frame are `{0,0}`, `{1,0}`, `{1,1}` and `{0,1}` read clockwise from the top-right.
+
+##Timers
+By default, there are no draw-loops in C4, which means that we can't trigger animations based on frame counts. But, there are a variety of techniques that we can use to offset the triggering of code. For example, we could use a `delay` that will execute a bit of code after a specified amount of time (measured in seconds).
+
+```
+delay(0.25) {
+    //run a method
+}
+```
+
+Delays are great for simple circumstances. You can tell the application to wait a quarter second before doing something. However, they become unreliable when you start chaining them together.
+
+If you want a lot of animations to start at regular intervals, the easiest technique is to use a `C4Timer`. You create one by specifying an interval and a block of code to execute. For example, printing to the console once every quarter-second looks like this:
+
+```
+```
+
+
+
 
 * Wave
  * Animations
