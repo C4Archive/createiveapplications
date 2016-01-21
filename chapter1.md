@@ -65,9 +65,41 @@ Delays are great for simple circumstances. You can tell the application to wait 
 If you want a lot of animations to start at regular intervals, the easiest technique is to use a `C4Timer`. You create one by specifying an interval and a block of code to execute. For example, printing to the console once every quarter-second looks like this:
 
 ```
+var timer: C4Timer!
+
+override func setup() {
+    timer = C4Timer(interval: 0.25) {
+        print("Hello C4")
+    }
+    timer.start()
+}
 ```
 
+And, if you want to know how many times the timer has fired, you can do this:
 
+```
+var timer: C4Timer!
+
+override func setup() {
+    timer = C4Timer(interval: 0.25) {
+        print("Hello C4: \(self.timer.step)")
+    }
+    timer.start()
+}
+```
+
+And, if you want to have the timer stop after a given number of iterations, you can do this:
+
+```
+var timer: C4Timer!
+
+override func setup() {
+    timer = C4Timer(interval: 0.25, count: 10) {
+        print("Hello C4: \(self.timer.step)")
+    }
+    timer.start()
+}
+```
 
 
 * Wave
