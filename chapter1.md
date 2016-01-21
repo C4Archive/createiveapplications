@@ -114,12 +114,14 @@ Now that we've had an overview of the 3 main components of this section, let's b
 To create our wave we're going to follow this 4-step process:
 
 1. Build a method that creates a gradient and adds it to the canvas
-2. Use a `repeat` loop to create a lot of gradients
-3. Build a method to customize an animation
+2. Build a method to customize an animation
+3. Use a `repeat` loop to create a lot of gradients
 4. Use a timer to initiates the animation for each gradient
 
 ###The Gradient Method
 The main reason we want to have a method that creates our gradient is because we're going to call it over and over again. This step is easy, and nearly the same as above (except for some minor changes).
+
+Here is what your main `WorkSpace` should look like:
 
 ```
 class WorkSpace: C4CanvasController {
@@ -134,10 +136,126 @@ class WorkSpace: C4CanvasController {
             colors = [C4Pink,C4Blue]
         }
 
-        let g = C4Gradient(frame: C4Rect(0,0,10.0,100.0), colors: colors)
+        let g = C4Gradient(frame: C4Rect(0,0,40,200), colors: colors)
         g.center = point
         canvas.add(g)
         return g
     }
 }
 ```
+
+>This produces the same image as our first experiment with gradients.
+
+The following line creates a random variable, either `0` or `1`:
+
+```
+random(below: 2) == 1
+```
+We use the result to determine whether we invert the colors of the gradient.
+
+The name of the method is:
+
+```
+createGradient(point: C4Point) -> C4Gradient
+```
+
+This specifies that the method requires you to give it a `point`, and when it has completed its job it will return to you a new `C4Gradient` object. Which is  why we see the `return g` statement at the end of the method.
+
+>Go ahead and run the code to see what this produces.
+
+Before you move on to the next step, make sure to change from this:
+
+```
+C4Rect(0,0,40,200)
+``` 
+
+...to: 
+
+```
+C4Rect(0,0,1,1)
+```
+
+###The Animation Method
+The effect we're going for is to have the gradient stretch upwards and downwards at the same time, while keeping its center position. To do so, add the following method to your `WorkSpace`:
+
+```
+func createAnimation(g: C4Gradient) {
+    let anim = C4ViewAnimation(duration: 2.0) {
+        var f = g.frame
+        let c = g.center
+        f.height = 100
+        f.center = c
+        g.frame = f
+    }
+    anim.curve = .EaseInOut
+    anim.autoreverses = true
+    anim.repeats = true
+    anim.animate()
+}
+```
+
+This method requires you to pass it a gradient. It then creates a new animation that does the following:
+
+1. Creates a new frame
+2. Copies the original frame's center
+3. Stretches the new frame's height
+4. Re-centers the new frame
+5. Sets the gradient's frame to the new frame
+
+The animation takes place over 2 seconds and when it completes it will reverse, and then repeat. This makes the gradient look like it grows and shrinks forever.
+
+Now, change your `setup()` to look like this:
+
+```
+override func setup() {
+    let g = createGradient(canvas.center)
+    createAnimation(g)
+}
+```
+
+After running your project, you should see something like this: 
+
+![Animated Gradient](animatedGradient.png)
+
+###The Repeat
+Next, we want to create a LOT of gradients. Since we have our method ready to do, all we need to do is change `setup` to run a loop so that we build enough objects to run across the screen.
+
+Do this:
+
+```
+var gradients = [C4Gradient]()
+override func setup() {
+    var x = 1.0
+    repeat {
+        gradients.append(createGradient(C4Point(x,canvas.center.y)))
+        x += 2.0
+    } while x < canvas.width
+}
+```
+
+>We want to keep track of our gradients, so we create an array that will hold them for us. 
+
+Run it, and you'll see this:
+
+![A lot of tiny gradients](aLotOfTinyGradients.png)
+
+###The Timer
+Let's bring those gradients to life with a timer.
+
+First, create a new timer variable outside of `setup`:
+
+```
+var timer: C4Timer!
+```
+
+Then, back inside `setup` and after the `repeat` loop, add the following:
+
+```
+timer = C4Timer(interval: 0.02, count: gradients.count) { () -> () in
+    let g = self.gradients[self.timer.step]
+    self.createAnim(g)
+}
+timer.start()
+```
+
+This bit of code creates a new timer that fires 50x per second, and fires as many times as ther are 
