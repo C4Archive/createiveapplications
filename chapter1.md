@@ -253,9 +253,40 @@ Then, back inside `setup` and after the `repeat` loop, add the following:
 ```
 timer = C4Timer(interval: 0.02, count: gradients.count) { () -> () in
     let g = self.gradients[self.timer.step]
-    self.createAnim(g)
+    self.createAnimation(g)
 }
 timer.start()
 ```
 
-This bit of code creates a new timer that fires 50x per second, and fires as many times as ther are 
+This bit of code creates a new timer that fires 50x per second (i.e. `0.02`, and once for every gradient in our array (i.e. `gradients.count`). 
+
+Since the timer starts its `step` at 0, the following lines of code grab the next gradient in the array and animate it:
+
+```
+let g = self.gradients[self.timer.step]
+self.createAnim(g)
+```
+
+After creating the timer, a call to `timer.start()` kicks things off.
+
+Run your code and you'll see this:
+
+![A basic wave](basicWave.png)
+
+###The Code For This Section
+Here's a copy of the code for this section: [Waves](https://gist.github.com/C4Framework/97d5f3fb5a59acc92424)
+
+
+
+##EXPERIMENT!
+Now that you've created your waves, try playing around with some variables. 
+
+In the `createGradient` method, you can add a transformation to the gradient like so:
+
+```
+g.transform.rotate(M_PI_4)
+```
+
+Try changing the variable to `0.05`, `0.2`, and `M_PI_4` to see some unique  renderings.
+
+Also, try playing with any of the other variables in the code!
